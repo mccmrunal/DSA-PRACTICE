@@ -1,0 +1,56 @@
+class mergeSort{
+
+    void combine(int[] arr,int left,int mid,int right){
+        int idx1 = left;
+        int idx2 = mid+1;
+        int idx = 0;
+        int[] combine = new int[right-left+1];
+
+        while(idx1<=mid && idx2<=right){
+            if(arr[idx1]<=arr[idx2])
+           {
+
+                combine[idx++] = arr[idx1++];}
+            else{
+               
+                combine[idx++] = arr[idx2++];
+            }
+        }
+        while(idx1<=mid){
+
+            combine[idx++] = arr[idx1++];
+        }
+        while(idx2<=right){
+            combine[idx++] = arr[idx2++];
+        }
+
+        for(int i=left,j=0;j<combine.length;i++,j++){
+            arr[i] = combine[j];
+        }
+
+
+
+    }
+   void sort(int[] arr,int low,int high){
+    if(low==high){
+        return ;
+    }
+    int mid = (low+high)/2;
+    sort(arr,low,mid);
+    sort(arr,mid+1,high);
+    combine(arr,low,mid,high);
+  
+    }
+
+
+public static void main(String args[]){
+    int arr[] = {51,44,743,742,7441};
+
+    mergeSort ob = new mergeSort();
+
+   ob.sort( arr,0,arr.length-1);
+    for (int i : arr) {
+        System.out.println(i);
+    }
+}
+}
